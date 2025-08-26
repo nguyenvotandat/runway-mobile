@@ -1,0 +1,60 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Flutter / Dart / Pub
+.dart_tool/
+.packages
+.pub/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+.buildlog/
+**/doc/api/
+
+# Build outputs
+build/
+**/build/
+coverage/
+
+# iOS / macOS (generated & ephemeral)
+ios/.symlinks/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+macos/Flutter/ephemeral/
+**/*.xcuserdatad/
+**/*.xcuserstate
+**/*.xcworkspace/xcuserdata/
+**/*.xcodeproj/xcuserdata/
+**/DerivedData/
+
+# Android
+android/.gradle/
+android/local.properties
+android/**/GeneratedPluginRegistrant.java
+android/**/GeneratedPluginRegistrant.kt
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Desktop
+windows/flutter/ephemeral/
+linux/flutter/ephemeral/
+
+# Symbolication / Obfuscation
+app.*.symbols
+app.*.map.json
+
+# Secrets (giữ lại .env.example để hướng dẫn)
+.env
+.env.*
+!.env.example
+
+# (Khuyên COMMIT) pubspec.lock để build ổn định
