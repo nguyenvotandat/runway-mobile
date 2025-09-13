@@ -13,8 +13,8 @@ abstract class PaginatedProductsModel with _$PaginatedProductsModel {
     required int page,
     required int limit,
     required int totalPages,
-    required bool hasNext,
-    required bool hasPrev,
+    @Default(false) bool hasNext,
+    @Default(false) bool hasPrev,
   }) = _PaginatedProductsModel;
 
   factory PaginatedProductsModel.fromJson(Map<String, dynamic> json) =>

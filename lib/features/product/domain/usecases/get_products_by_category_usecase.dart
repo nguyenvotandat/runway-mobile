@@ -8,7 +8,7 @@ class GetProductsByCategoryUseCase {
 
   GetProductsByCategoryUseCase(this.repository);
 
-  Future<Either<Failure, List<Product>>> call(
+  Future<Either<Failure, List<ProductEntity>>> call(
     String categoryId, {
     int limit = 10,
   }) async {

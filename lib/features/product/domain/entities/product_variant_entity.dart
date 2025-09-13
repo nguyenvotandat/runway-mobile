@@ -33,6 +33,14 @@ class ProductVariantEntity extends Equatable {
     this.prices = const [],
   });
 
+  // Helper getters
+  bool get isAvailable => status == 'active' && (inventory?.quantity ?? 0) > 0;
+
+  double? get currentPrice {
+    if (prices.isEmpty) return null;
+    return prices.first.amount;
+  }
+
   @override
   List<Object?> get props => [
     id,

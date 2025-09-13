@@ -215,7 +215,7 @@ return $default(_that.data,_that.total,_that.page,_that.limit,_that.totalPages,_
 @JsonSerializable()
 
 class _PaginatedProductsModel implements PaginatedProductsModel {
-  const _PaginatedProductsModel({required final  List<ProductModel> data, required this.total, required this.page, required this.limit, required this.totalPages, required this.hasNext, required this.hasPrev}): _data = data;
+  const _PaginatedProductsModel({required final  List<ProductModel> data, required this.total, required this.page, required this.limit, required this.totalPages, this.hasNext = false, this.hasPrev = false}): _data = data;
   factory _PaginatedProductsModel.fromJson(Map<String, dynamic> json) => _$PaginatedProductsModelFromJson(json);
 
  final  List<ProductModel> _data;
@@ -229,8 +229,8 @@ class _PaginatedProductsModel implements PaginatedProductsModel {
 @override final  int page;
 @override final  int limit;
 @override final  int totalPages;
-@override final  bool hasNext;
-@override final  bool hasPrev;
+@override@JsonKey() final  bool hasNext;
+@override@JsonKey() final  bool hasPrev;
 
 /// Create a copy of PaginatedProductsModel
 /// with the given fields replaced by the non-null parameter values.

@@ -8,7 +8,7 @@ class GetProductDetailUseCase {
 
   GetProductDetailUseCase(this.repository);
 
-  Future<Either<Failure, Product>> call(String id) async {
+  Future<Either<Failure, ProductEntity>> call(String id) async {
     if (id.isEmpty) {
       return const Left(ValidationFailure('ID sản phẩm không được để trống'));
     }

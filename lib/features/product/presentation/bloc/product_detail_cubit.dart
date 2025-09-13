@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/product_entity.dart';
+import '../../domain/entities/product_variant_entity.dart';
 import '../../domain/usecases/get_product_detail_usecase.dart';
 
 // States
@@ -20,11 +21,11 @@ class ProductDetailLoading extends ProductDetailState {
 }
 
 class ProductDetailLoaded extends ProductDetailState {
-  final Product product;
+  final ProductEntity product;
   final int selectedImageIndex;
   final String? selectedColorId;
   final String? selectedSizeId;
-  final ProductVariant? selectedVariant;
+  final ProductVariantEntity? selectedVariant;
 
   const ProductDetailLoaded({
     required this.product,
@@ -44,11 +45,11 @@ class ProductDetailLoaded extends ProductDetailState {
   ];
 
   ProductDetailLoaded copyWith({
-    Product? product,
+    ProductEntity? product,
     int? selectedImageIndex,
     String? selectedColorId,
     String? selectedSizeId,
-    ProductVariant? selectedVariant,
+    ProductVariantEntity? selectedVariant,
   }) {
     return ProductDetailLoaded(
       product: product ?? this.product,
@@ -91,7 +92,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       product,
     ) {
       // Auto select first available variant if exists
-      ProductVariant? firstAvailableVariant;
+      ProductVariantEntity? firstAvailableVariant;
       if (product.variants.isNotEmpty) {
         firstAvailableVariant =
             product.variants.where((v) => v.isAvailable).isNotEmpty
@@ -122,7 +123,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       final currentState = state as ProductDetailLoaded;
 
       // Find variant with this color and current size (if selected)
-      ProductVariant? newVariant =
+      ProductVariantEntity? newVariant =
           currentState.product.variants
               .where(
                 (v) =>
@@ -160,7 +161,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
       final currentState = state as ProductDetailLoaded;
 
       // Find variant with this size and current color (if selected)
-      ProductVariant? newVariant =
+      ProductVariantEntity? newVariant =
           currentState.product.variants
               .where(
                 (v) =>

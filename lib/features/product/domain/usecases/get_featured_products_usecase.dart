@@ -8,7 +8,7 @@ class GetFeaturedProductsUseCase {
 
   GetFeaturedProductsUseCase(this.repository);
 
-  Future<Either<Failure, List<Product>>> call({int limit = 10}) async {
+  Future<Either<Failure, List<ProductEntity>>> call({int limit = 10}) async {
     if (limit <= 0) {
       return const Left(ValidationFailure('Số lượng sản phẩm phải lớn hơn 0'));
     }

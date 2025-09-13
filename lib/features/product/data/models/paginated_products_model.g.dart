@@ -16,8 +16,8 @@ _PaginatedProductsModel _$PaginatedProductsModelFromJson(
   page: (json['page'] as num).toInt(),
   limit: (json['limit'] as num).toInt(),
   totalPages: (json['totalPages'] as num).toInt(),
-  hasNext: json['hasNext'] as bool,
-  hasPrev: json['hasPrev'] as bool,
+  hasNext: json['hasNext'] as bool? ?? false,
+  hasPrev: json['hasPrev'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$PaginatedProductsModelToJson(

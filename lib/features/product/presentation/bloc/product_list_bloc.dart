@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/product_entity.dart';
-import '../../domain/entities/paginated_products_entity.dart';
 import '../../domain/repositories/product_repository.dart';
 import '../../domain/usecases/get_products_usecase.dart';
 
@@ -66,7 +65,7 @@ class ProductListLoading extends ProductListState {
 }
 
 class ProductListRefreshing extends ProductListState {
-  final List<Product> products;
+  final List<ProductEntity> products;
 
   const ProductListRefreshing(this.products);
 
@@ -75,7 +74,7 @@ class ProductListRefreshing extends ProductListState {
 }
 
 class ProductListLoadingMore extends ProductListState {
-  final List<Product> products;
+  final List<ProductEntity> products;
   final int currentPage;
   final bool hasMore;
 
@@ -90,7 +89,7 @@ class ProductListLoadingMore extends ProductListState {
 }
 
 class ProductListLoaded extends ProductListState {
-  final List<Product> products;
+  final List<ProductEntity> products;
   final int currentPage;
   final int totalPages;
   final int total;
@@ -117,7 +116,7 @@ class ProductListLoaded extends ProductListState {
   ];
 
   ProductListLoaded copyWith({
-    List<Product>? products,
+    List<ProductEntity>? products,
     int? currentPage,
     int? totalPages,
     int? total,
@@ -150,7 +149,7 @@ class ProductListEmpty extends ProductListState {
 
 class ProductListError extends ProductListState {
   final String message;
-  final List<Product> products;
+  final List<ProductEntity> products;
 
   const ProductListError({required this.message, this.products = const []});
 

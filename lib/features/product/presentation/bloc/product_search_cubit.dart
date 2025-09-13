@@ -13,7 +13,7 @@ abstract class ProductSearchState extends Equatable {
 }
 
 class ProductSearchInitial extends ProductSearchState {
-  final List<Product> featuredProducts;
+  final List<ProductEntity> featuredProducts;
 
   const ProductSearchInitial({this.featuredProducts = const []});
 
@@ -32,7 +32,7 @@ class ProductSearchLoading extends ProductSearchState {
 
 class ProductSearchLoaded extends ProductSearchState {
   final String query;
-  final List<Product> results;
+  final List<ProductEntity> results;
   final int resultCount;
 
   const ProductSearchLoaded({
@@ -73,7 +73,7 @@ class FeaturedProductsLoading extends ProductSearchState {
 }
 
 class FeaturedProductsLoaded extends ProductSearchState {
-  final List<Product> products;
+  final List<ProductEntity> products;
 
   const FeaturedProductsLoaded(this.products);
 

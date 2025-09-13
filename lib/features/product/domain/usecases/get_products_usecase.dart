@@ -8,7 +8,7 @@ class GetProductsUseCase {
 
   GetProductsUseCase(this.repository);
 
-  Future<Either<Failure, PaginatedProducts>> call({
+  Future<Either<Failure, PaginatedProductsEntity>> call({
     ProductFilter? filter,
     int page = 1,
     int limit = 10,

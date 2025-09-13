@@ -55,22 +55,24 @@ class ProductFilter {
 }
 
 abstract class ProductRepository {
-  Future<Either<Failure, PaginatedProducts>> getProducts({
+  Future<Either<Failure, PaginatedProductsEntity>> getProducts({
     ProductFilter? filter,
     int page = 1,
     int limit = 10,
   });
 
-  Future<Either<Failure, Product>> getProductDetail(String id);
+  Future<Either<Failure, ProductEntity>> getProductDetail(String id);
 
-  Future<Either<Failure, List<Product>>> searchProducts(
+  Future<Either<Failure, List<ProductEntity>>> searchProducts(
     String query, {
     int limit = 20,
   });
 
-  Future<Either<Failure, List<Product>>> getFeaturedProducts({int limit = 10});
+  Future<Either<Failure, List<ProductEntity>>> getFeaturedProducts({
+    int limit = 10,
+  });
 
-  Future<Either<Failure, List<Product>>> getProductsByCategory(
+  Future<Either<Failure, List<ProductEntity>>> getProductsByCategory(
     String categoryId, {
     int limit = 10,
   });

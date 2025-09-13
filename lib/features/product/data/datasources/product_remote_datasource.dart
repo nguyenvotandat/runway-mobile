@@ -4,6 +4,16 @@ import '../../../../core/utils/constants.dart';
 import '../../domain/repositories/product_repository.dart';
 import '../models/models.dart';
 
+// Helper function to extract error message from API response
+String _extractErrorMessage(dynamic responseMessage, String fallbackMessage) {
+  if (responseMessage is String) {
+    return responseMessage;
+  } else if (responseMessage is List && responseMessage.isNotEmpty) {
+    return responseMessage.first.toString();
+  }
+  return fallbackMessage;
+}
+
 abstract class ProductRemoteDataSource {
   Future<PaginatedProductsModel> getProducts({
     ProductFilter? filter,
@@ -35,7 +45,9 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     int limit = 10,
   }) async {
     try {
-      final queryParams = <String, dynamic>{'page': page, 'limit': limit};
+      // Note: Current backend API doesn't support page/limit via query parameters
+      // We'll get all products and handle pagination client-side if needed
+      final queryParams = <String, dynamic>{};
 
       if (filter != null) {
         if (filter.categoryId != null) {
@@ -73,10 +85,16 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
         // Backend trả về { success: true, data: { data: [...], total: ..., ... } }
         return PaginatedProductsModel.fromJson(response.data['data']);
       } else {
-        throw ServerException(
-          response.data['message'] ?? 'Không thể lấy danh sách sản phẩm',
-          response.statusCode,
-        );
+        // Handle error message that can be either String or List<String>
+        String errorMessage = 'Không thể lấy danh sách sản phẩm';
+        final responseMessage = response.data['message'];
+        if (responseMessage is String) {
+          errorMessage = responseMessage;
+        } else if (responseMessage is List && responseMessage.isNotEmpty) {
+          errorMessage = responseMessage.first.toString();
+        }
+
+        throw ServerException(errorMessage, response.statusCode);
       }
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionTimeout ||
@@ -87,7 +105,10 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
         throw const NetworkException('Không thể kết nối đến máy chủ');
       } else {
         throw ServerException(
-          e.response?.data['message'] ?? 'Không thể lấy danh sách sản phẩm',
+          _extractErrorMessage(
+            e.response?.data['message'],
+            'Không thể lấy danh sách sản phẩm',
+          ),
           e.response?.statusCode,
         );
       }
@@ -121,7 +142,10 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
         throw const ServerException('Không tìm thấy sản phẩm');
       } else {
         throw ServerException(
-          e.response?.data['message'] ?? 'Không thể lấy thông tin sản phẩm',
+          _extractErrorMessage(
+            e.response?.data['message'],
+            'Không thể lấy thông tin sản phẩm',
+          ),
           e.response?.statusCode,
         );
       }
@@ -159,7 +183,10 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
         throw const NetworkException('Không thể kết nối đến máy chủ');
       } else {
         throw ServerException(
-          e.response?.data['message'] ?? 'Không thể tìm kiếm sản phẩm',
+          _extractErrorMessage(
+            e.response?.data['message'],
+            'Không thể tìm kiếm sản phẩm',
+          ),
           e.response?.statusCode,
         );
       }
@@ -194,7 +221,10 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
         throw const NetworkException('Không thể kết nối đến máy chủ');
       } else {
         throw ServerException(
-          e.response?.data['message'] ?? 'Không thể lấy sản phẩm nổi bật',
+          _extractErrorMessage(
+            e.response?.data['message'],
+            'Không thể lấy sản phẩm nổi bật',
+          ),
           e.response?.statusCode,
         );
       }
@@ -232,7 +262,10 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
         throw const NetworkException('Không thể kết nối đến máy chủ');
       } else {
         throw ServerException(
-          e.response?.data['message'] ?? 'Không thể lấy sản phẩm theo danh mục',
+          _extractErrorMessage(
+            e.response?.data['message'],
+            'Không thể lấy sản phẩm theo danh mục',
+          ),
           e.response?.statusCode,
         );
       }

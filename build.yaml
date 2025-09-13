@@ -8,6 +8,7 @@ targets:
             ".dart": [".freezed.dart"]
         generate_for:
           - lib/features/**/models/*.dart
+          - lib/features/**/bloc/*.dart
       json_serializable:
         generate_for:
           - lib/features/**/models/*.dart

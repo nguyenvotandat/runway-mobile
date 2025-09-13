@@ -8,7 +8,7 @@ class SearchProductsUseCase {
 
   SearchProductsUseCase(this.repository);
 
-  Future<Either<Failure, List<Product>>> call(
+  Future<Either<Failure, List<ProductEntity>>> call(
     String query, {
     int limit = 20,
   }) async {

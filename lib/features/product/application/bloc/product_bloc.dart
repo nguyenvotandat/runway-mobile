@@ -88,12 +88,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           ...newPaginatedProducts.products,
         ];
 
-        final updatedPaginatedProducts = PaginatedProducts(
+        final updatedPaginatedProducts = PaginatedProductsEntity(
           products: allProducts,
           total: newPaginatedProducts.total,
           page: newPaginatedProducts.page,
           limit: newPaginatedProducts.limit,
           totalPages: newPaginatedProducts.totalPages,
+          hasNext: newPaginatedProducts.hasNext,
+          hasPrev: newPaginatedProducts.hasPrev,
         );
 
         emit(ProductState.loaded(updatedPaginatedProducts));
