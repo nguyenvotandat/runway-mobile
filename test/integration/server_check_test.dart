@@ -17,12 +17,17 @@ void main() {
 
       try {
         // Test basic server response
-        final response = await dio.get('/api');
+        final response = await dio.get(
+          '/api',
+        ); // ← BREAKPOINT 1: Đặt ở đây để debug API call
         print('✅ Server is running!');
         print('📊 Status: ${response.statusCode}');
         print('📦 Response: ${response.data}');
 
-        expect(response.statusCode, 200);
+        expect(
+          response.statusCode,
+          200,
+        ); // ← BREAKPOINT 2: Đặt ở đây để xem response trước khi assert
       } catch (e) {
         print('❌ Server is not running or not accessible');
         print('🔍 Error: $e');
@@ -39,20 +44,24 @@ void main() {
 
       try {
         // Test products endpoint specifically
-        final response = await dio.get('/api/products');
+        final response = await dio.get(
+          '/api/products',
+        ); // ← BREAKPOINT 3: Debug Products API call
         print('✅ Products endpoint is working!');
         print('📊 Status: ${response.statusCode}');
         print('📦 Response type: ${response.data.runtimeType}');
 
         if (response.data is Map<String, dynamic>) {
-          final data = response.data as Map<String, dynamic>;
+          final data =
+              response.data
+                  as Map<String, dynamic>; // ← BREAKPOINT 4: Xem cấu trúc data
           print('📋 Response structure:');
           data.forEach((key, value) {
             print('   $key: ${value.runtimeType}');
           });
         }
 
-        expect(response.statusCode, 200);
+        expect(response.statusCode, 200); // ← BREAKPOINT 5: Verify assertion
       } catch (e) {
         print('❌ Products endpoint failed');
         print('🔍 Error: $e');

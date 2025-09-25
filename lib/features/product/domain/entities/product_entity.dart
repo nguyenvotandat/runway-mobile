@@ -4,7 +4,6 @@ import 'package:runway_mobile/features/product/domain/entities/brand_entity.dart
 import 'package:runway_mobile/features/product/domain/entities/product_image_entity.dart';
 import 'package:runway_mobile/features/product/domain/entities/product_variant_entity.dart';
 
-
 class ProductEntity extends Equatable {
   final String id;
   final String name;
@@ -14,7 +13,6 @@ class ProductEntity extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
   final BrandEntity brand;
-  final String brandId;
   final CategoryEntity category;
   final String categoryId;
   final List<ProductVariantEntity> variants;
@@ -31,7 +29,6 @@ class ProductEntity extends Equatable {
     required this.createdAt,
     required this.updatedAt,
     required this.brand,
-    required this.brandId,
     required this.category,
     required this.categoryId,
     this.variants = const [],
@@ -40,9 +37,6 @@ class ProductEntity extends Equatable {
     this.ratingCount = 0,
   });
 
-
-
-  
   @override
   List<Object?> get props => [
     id,
@@ -53,7 +47,6 @@ class ProductEntity extends Equatable {
     createdAt,
     updatedAt,
     brand,
-    brandId,
     category,
     categoryId,
     variants,

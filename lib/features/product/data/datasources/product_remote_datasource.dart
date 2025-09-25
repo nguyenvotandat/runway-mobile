@@ -45,9 +45,8 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     int limit = 10,
   }) async {
     try {
-      // Note: Current backend API doesn't support page/limit via query parameters
-      // We'll get all products and handle pagination client-side if needed
-      final queryParams = <String, dynamic>{};
+      // Add pagination parameters to query
+      final queryParams = <String, dynamic>{'page': page, 'limit': limit};
 
       if (filter != null) {
         if (filter.categoryId != null) {

@@ -25,6 +25,8 @@ import '../../features/product/domain/usecases/get_products_usecase.dart';
 import '../../features/product/domain/usecases/get_product_detail_usecase.dart';
 import '../../features/product/application/bloc/product_bloc.dart';
 
+import '../utils/constants.dart';
+
 final GetIt getIt = GetIt.instance;
 
 @InjectableInit()
@@ -38,7 +40,7 @@ Future<void> configureDependencies() async {
 
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'http://localhost:3000/api',
+      baseUrl: AppConstants.baseUrl,
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 30),
       headers: {'Content-Type': 'application/json'},

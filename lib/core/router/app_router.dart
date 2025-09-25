@@ -1,15 +1,14 @@
-
 import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/view/login_page.dart';
 import '../../features/auth/presentation/view/register_page.dart';
 import '../../features/catalog/presentation/view/catalog_page.dart';
-import '../../features/product/presentation/view/product_detail_page.dart';
+import '../../features/product/product.dart'; // Using barrel export
 import '../../features/cart/presentation/view/cart_page.dart';
 import '../../features/profile/presentation/view/profile_page.dart';
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
-    initialLocation: '/catalog',
+    initialLocation: '/product/3e86e634-b913-481d-9a50-6306d509547f',
     routes: [
       // Auth routes
       GoRoute(

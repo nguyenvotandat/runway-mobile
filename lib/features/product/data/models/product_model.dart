@@ -47,7 +47,6 @@ extension ProductModelMapper on ProductModel {
       createdAt: createdAt,
       updatedAt: updatedAt,
       brand: brand?.toEntity() ?? BrandEntity(id: brandId, name: ''),
-      brandId: brandId,
       category:
           category?.toEntity() ?? CategoryEntity(id: categoryId, name: ''),
       categoryId: categoryId,

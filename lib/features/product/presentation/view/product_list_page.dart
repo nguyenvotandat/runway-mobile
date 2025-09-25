@@ -237,7 +237,7 @@ class _ProductListPageState extends State<ProductListPage> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          product.brand,
+                          product.brand.name,
                           style: context.textTheme.bodySmall?.copyWith(
                             color: Colors.grey[600],
                           ),
@@ -247,7 +247,13 @@ class _ProductListPageState extends State<ProductListPage> {
                       ],
                     ),
                     Text(
-                      product.price.formatCurrency,
+                      () {
+                        if (product.variants.isNotEmpty) {
+                          final price = product.variants.first.currentPrice;
+                          return price?.formatCurrency ?? 'N/A';
+                        }
+                        return 'N/A';
+                      }(),
                       style: context.textTheme.labelLarge?.copyWith(
                         color: context.colorScheme.primary,
                         fontWeight: FontWeight.bold,

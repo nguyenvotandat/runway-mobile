@@ -1,6 +1,6 @@
 class AppConstants {
   static const String appName = 'Runway Fashion';
-  static const String baseUrl = 'http://localhost:3000/api';
+  static const String baseUrl = 'http://10.0.2.2:3000/api';
 
   // Storage keys
   static const String accessTokenKey = 'access_token';

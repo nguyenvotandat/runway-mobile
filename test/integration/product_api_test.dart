@@ -97,7 +97,7 @@ void main() {
           print('   ID: ${firstProduct.id}');
           print('   Name: ${firstProduct.name}');
           print('   Description: ${firstProduct.description ?? "N/A"}');
-          print('   Brand: ${firstProduct.brandId}');
+          print('   Brand: ${firstProduct.brand?.name ?? 'Unknown'}');
           print('   Category: ${firstProduct.categoryId}');
           print('   Variants: ${firstProduct.variants.length}');
           print('   Images: ${firstProduct.images.length}');
@@ -106,7 +106,7 @@ void main() {
           // Validate first product structure
           expect(firstProduct.id, isNotEmpty);
           expect(firstProduct.name, isNotEmpty);
-          expect(firstProduct.brandId, isNotEmpty);
+          expect(firstProduct.brand?.id ?? firstProduct.brandId, isNotEmpty);
           expect(firstProduct.categoryId, isNotEmpty);
           expect(firstProduct.variants, isList);
           expect(firstProduct.images, isList);
@@ -355,7 +355,7 @@ void main() {
         print('   Name: ${productDetail.name}');
         print('   Description: ${productDetail.description}');
         print('   Category: ${productDetail.categoryId}');
-        print('   Brand: ${productDetail.brandId}');
+        print('   Brand: ${productDetail.brand?.name ?? 'Unknown'}');
         print('   Images count: ${productDetail.images.length}');
         print('   Variants count: ${productDetail.variants.length}');
         print('   Rating: ${productDetail.ratingAverage ?? "N/A"}');
@@ -380,7 +380,7 @@ void main() {
         expect(productDetail.id, equals(productId));
         expect(productDetail.name, isNotEmpty);
         expect(productDetail.categoryId, isNotEmpty);
-        expect(productDetail.brandId, isNotEmpty);
+        expect(productDetail.brand?.id ?? productDetail.brandId, isNotEmpty);
         expect(productDetail.images, isList);
         expect(productDetail.variants, isList);
 
@@ -479,7 +479,7 @@ void main() {
           expect(product.id, isA<String>());
           expect(product.name, isA<String>());
           expect(product.description, isA<String>());
-          expect(product.brandId, isA<String>());
+          expect(product.brand?.id ?? product.brandId, isA<String>());
           expect(product.categoryId, isA<String>());
           expect(product.images, isList);
           expect(product.variants, isList);

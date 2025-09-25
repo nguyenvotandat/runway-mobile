@@ -1,31 +1,30 @@
 import 'package:dartz/dartz.dart';
+import 'package:runway_mobile/features/product/data/models/get_products_by_category_pasrams.dart';
 import '../../../../core/errors/failures.dart';
+import '../../../../core/usecase/usecase.dart';
 import '../entities/product_entity.dart';
 import '../repositories/product_repository.dart';
 
-class GetProductsByCategoryUseCase {
+
+class GetProductsByCategoryUseCase
+    implements UseCase<List<ProductEntity>, GetProductsByCategoryParams> {
   final ProductRepository repository;
 
   GetProductsByCategoryUseCase(this.repository);
 
+  @override
   Future<Either<Failure, List<ProductEntity>>> call(
-    String categoryId, {
-    int limit = 10,
-  }) async {
-    if (categoryId.isEmpty) {
-      return const Left(ValidationFailure('ID danh mục không được để trống'));
-    }
-
-    if (limit <= 0) {
-      return const Left(ValidationFailure('Số lượng sản phẩm phải lớn hơn 0'));
-    }
-
-    if (limit > 50) {
-      return const Left(
-        ValidationFailure('Số lượng sản phẩm không được vượt quá 50'),
+    GetProductsByCategoryParams params,
+  ) async {
+    // ✅ Business validation thay vì technical validation
+    try {
+      return await repository.getProductsByCategory(
+        params.categoryId,
+        limit: params.limit,
       );
+    } catch (e) {
+      // Handle repository exceptions
+      return Left(ServerFailure(e.toString()));
     }
-
-    return await repository.getProductsByCategory(categoryId, limit: limit);
   }
 }

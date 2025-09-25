@@ -65,7 +65,7 @@ void main() {
           print('\n🛍️ Sample Product:');
           print('   ID: ${product.id}');
           print('   Name: ${product.name}');
-          print('   Brand ID: ${product.brandId}');
+          print('   Brand Name: ${product.brand?.name ?? 'Unknown'}');
           print('   Category ID: ${product.categoryId}');
           print('   Variants: ${product.variants.length}');
           print('   Images: ${product.images.length}');

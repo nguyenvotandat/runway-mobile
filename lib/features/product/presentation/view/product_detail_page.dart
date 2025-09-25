@@ -112,7 +112,7 @@ class ProductDetailPage extends StatelessWidget {
                 Text(product.name, style: context.textTheme.headlineMedium),
                 const SizedBox(height: 8),
                 Text(
-                  product.brand,
+                  product.brand.name,
                   style: context.textTheme.titleMedium?.copyWith(
                     color: Colors.grey[600],
                   ),
@@ -120,71 +120,77 @@ class ProductDetailPage extends StatelessWidget {
                 const SizedBox(height: 16),
 
                 // Price
-                Text(
-                  product.price.formatCurrency,
-                  style: context.textTheme.headlineSmall?.copyWith(
-                    color: context.colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 24),
+                // Text(
+                //   () {
+                //     if (product.variants.isNotEmpty) {
+                //       final price = product.variants.first.currentPrice;
+                //       return price?.formatCurrency ?? 'N/A';
+                //     }
+                //     return 'N/A';
+                //   }(),
+                //   style: context.textTheme.headlineSmall?.copyWith(
+                //     color: context.colorScheme.primary,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
+                // const SizedBox(height: 24),
 
-                // Colors
-                if (product.colors.isNotEmpty) ...[
-                  Text('Màu sắc', style: context.textTheme.titleLarge),
-                  const SizedBox(height: 12),
-                  Wrap(
-                    spacing: 12,
-                    children: product.colors.map((color) {
-                      return Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Color(
-                            int.parse(color.hex.replaceFirst('#', '0xFF')),
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.grey[300]!),
-                        ),
-                        child: Tooltip(
-                          message: color.name,
-                          child: const SizedBox(),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                  const SizedBox(height: 24),
-                ],
+                // // Colors
+                // if (product.colors.isNotEmpty) ...[
+                //   Text('Màu sắc', style: context.textTheme.titleLarge),
+                //   const SizedBox(height: 12),
+                //   Wrap(
+                //     spacing: 12,
+                //     children: product.colors.map((color) {
+                //       return Container(
+                //         width: 40,
+                //         height: 40,
+                //         decoration: BoxDecoration(
+                //           color: Color(
+                //             int.parse(color.hex.replaceFirst('#', '0xFF')),
+                //           ),
+                //           borderRadius: BorderRadius.circular(20),
+                //           border: Border.all(color: Colors.grey[300]!),
+                //         ),
+                //         child: Tooltip(
+                //           message: color.name,
+                //           child: const SizedBox(),
+                //         ),
+                //       );
+                //     }).toList(),
+                //   ),
+                //   const SizedBox(height: 24),
+                // ],
 
-                // 3D Model viewer
-                if (product.glbUrl != null) ...[
-                  Text('Xem 3D', style: context.textTheme.titleLarge),
-                  const SizedBox(height: 12),
-                  Container(
-                    height: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.grey[300]!),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: ModelViewer(
-                        src: product.glbUrl!,
-                        alt: 'Mô hình 3D của ${product.name}',
-                        autoRotate: true,
-                        cameraControls: true,
-                        backgroundColor: const Color(0xFFEEEEEE),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                ],
+                // // 3D Model viewer
+                // if (product.glbUrl != null) ...[
+                //   Text('Xem 3D', style: context.textTheme.titleLarge),
+                //   const SizedBox(height: 12),
+                //   Container(
+                //     height: 300,
+                //     decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(12),
+                //       border: Border.all(color: Colors.grey[300]!),
+                //     ),
+                //     child: ClipRRect(
+                //       borderRadius: BorderRadius.circular(12),
+                //       child: ModelViewer(
+                //         src: product.glbUrl!,
+                //         alt: 'Mô hình 3D của ${product.name}',
+                //         autoRotate: true,
+                //         cameraControls: true,
+                //         backgroundColor: const Color(0xFFEEEEEE),
+                //       ),
+                //     ),
+                //   ),
+                //   const SizedBox(height: 24),
+                // ],
 
                 // Description (placeholder)
                 Text('Mô tả sản phẩm', style: context.textTheme.titleLarge),
                 const SizedBox(height: 12),
                 Text(
-                  'Đây là một sản phẩm thời trang chất lượng cao từ thương hiệu ${product.brand}. '
+                  'Đây là một sản phẩm thời trang chất lượng cao từ thương hiệu ${product.brand.name}. '
                   'Sản phẩm được thiết kế với chất liệu cao cấp và kiểu dáng hiện đại, '
                   'phù hợp cho nhiều dịp khác nhau.',
                   style: context.textTheme.bodyLarge?.copyWith(
