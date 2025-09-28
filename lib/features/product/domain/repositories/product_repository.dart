@@ -72,8 +72,9 @@ abstract class ProductRepository {
     int limit = 10,
   });
 
-  Future<Either<Failure, List<ProductEntity>>> getProductsByCategory(
+  Future<Either<Failure, PaginatedProductsEntity>> getProductsByCategory(
     String categoryId, {
+    int page = 1,
     int limit = 10,
   });
 }

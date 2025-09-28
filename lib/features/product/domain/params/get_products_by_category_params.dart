@@ -1,14 +1,14 @@
-class GetProductsByCategoryParams {
+class GetProductsByCategory {
   final String categoryId;
   final int limit;
 
-  const GetProductsByCategoryParams._({
+  const GetProductsByCategory._({
     required this.categoryId,
     required this.limit,
   });
 
   // ✅ Technical validation ở đây
-  factory GetProductsByCategoryParams({
+  factory GetProductsByCategory({
     required String categoryId,
     int limit = 10,
   }) {
@@ -24,7 +24,7 @@ class GetProductsByCategoryParams {
       throw ArgumentError('Limit cannot exceed 50');
     }
 
-    return GetProductsByCategoryParams._(
+    return GetProductsByCategory._(
       categoryId: categoryId.trim(),
       limit: limit,
     );

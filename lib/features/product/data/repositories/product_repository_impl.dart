@@ -82,16 +82,18 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, List<ProductEntity>>> getProductsByCategory(
+  Future<Either<Failure, PaginatedProductsEntity>> getProductsByCategory(
     String categoryId, {
+    int page = 1,
     int limit = 10,
   }) async {
     try {
-      final result = await remoteDataSource.getProductsByCategory(
-        categoryId,
+      final result = await remoteDataSource.getProducts(
+        filter: ProductFilter(categoryId: categoryId),
+        page: page,
         limit: limit,
       );
-      return Right(result.map((model) => model.toEntity()).toList());
+      return Right(result.toEntity());
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } on NetworkException catch (e) {

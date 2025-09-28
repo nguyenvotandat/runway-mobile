@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:runway_mobile/features/product/data/models/get_products_by_category_params.dart';
 import '../../domain/entities/product_entity.dart';
 import '../../domain/usecases/get_products_by_category_usecase.dart';
 import '../../../../core/bloc/base_bloc.dart';
@@ -53,12 +52,12 @@ class CategoryProductsBloc
     await handleEitherResult(
       emit,
       () => _getProductsByCategoryUseCase.call(
-        GetProductsByCategory(
-          categoryId: event.categoryId,
-          limit: event.limit,
-        ),
+        categoryId: event.categoryId,
+        page: 1,
+        limit: event.limit,
       ),
-      (products) => CategoryProductsSuccess(products),
+      (paginatedProducts) =>
+          CategoryProductsSuccess(paginatedProducts.products),
       (message) => CategoryProductsError(message),
     );
   }
