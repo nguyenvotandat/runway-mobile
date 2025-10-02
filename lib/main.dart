@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'core/di/injection.dart';
 import 'core/router/app_router.dart';
@@ -18,7 +19,8 @@ class RunwayApp extends StatelessWidget {
       title: 'Runway Fashion',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      routerConfig: AppRouter.router,
+      // 🚧 Development mode: Route to playground, Production: Normal routing
+      routerConfig: AppRouter.getRouter(kDebugMode),
       debugShowCheckedModeBanner: false,
     );
   }

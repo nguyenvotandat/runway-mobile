@@ -10,6 +10,11 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
+
+      scaffoldBackgroundColor: const Color(
+        0xFFF2F3F7,
+      ), // ✅ Background cho tất cả Scaffold
+      canvasColor: Colors.white60,
       colorScheme: const ColorScheme.light(
         primary: _primaryColor,
         secondary: _accentColor,

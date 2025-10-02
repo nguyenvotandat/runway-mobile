@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:model_viewer_plus/model_viewer_plus.dart';
 import '../../../../core/di/injection.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../application/bloc/product_bloc.dart';
